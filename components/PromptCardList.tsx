@@ -9,7 +9,7 @@ interface PromptCardListProps {
         prompt: string
         tag: string
     }[]
-    handleTagClick: () => void
+    handleTagClick: (tag: string) => void
 }
 
 const PromptCardList: React.FC<PromptCardListProps> = ({ data, handleTagClick }) => {
