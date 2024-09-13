@@ -1,10 +1,11 @@
 import React from 'react'
 import PromptCard from './PromptCard'
+import { User } from 'next-auth'
 
 interface PromptCardListProps {
     data: {
         id: string
-        userId: string
+        creator: User
         prompt: string
         tag: string
     }[]
