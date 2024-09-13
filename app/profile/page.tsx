@@ -5,9 +5,17 @@ import React, { useEffect, useState } from 'react'
 import Profile from '@components/Profile';
 import { useRouter } from 'next/navigation';
 
+interface Post {
+  _id: string
+  creator: {_id: string, image: string, name: string, email: string}
+  prompt: string
+  tag: string
+}
+
+
 const ProfilePage = () => {
   const {data: session} = useSession();
-  const [posts, setPosts] = useState<any>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const router = useRouter();
 
   useEffect(() => {
