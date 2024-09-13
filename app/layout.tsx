@@ -7,7 +7,8 @@ import { Session } from 'next-auth'
 
 export const metaData: Metadata = {
     title: 'Prompt Share',
-    description: 'Discover and Share AI Prompts'
+    description: 'Discover and Share AI Prompts',
+    icons: '/assets/images/logo.svg'
 }
 
 interface LayoutProps {
