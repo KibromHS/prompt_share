@@ -58,10 +58,10 @@ const handler = NextAuth({
           }
         }
 
-        return true; // Allow sign-in
+        return true;
       } catch (e) {
         console.error(e);
-        return false; // Deny sign-in on error
+        return false;
       }
     },
   },
