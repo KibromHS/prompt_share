@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 interface PromptCardProps {
@@ -21,6 +21,7 @@ const PromptCard: React.FC<PromptCardProps> = ({ post, handleTagClick, handleEdi
   const [copied, setCopied] = useState('');
   const {data: session} = useSession();
   const pathName = usePathname();
+  const router = useRouter();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(post.prompt);
@@ -28,11 +29,19 @@ const PromptCard: React.FC<PromptCardProps> = ({ post, handleTagClick, handleEdi
     setInterval(() => setCopied(''), 3000);
   }
 
+  const handleClick = () => {
+    if (session?.user.id === post.creator._id) {
+      router.push('/profile');
+    } else {
+      router.push(`/profile/${post.creator._id}`);
+    }
+  }
+
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className='flex-1 flex justify-start items-center gap-3 cursor-pointer'>
-          <Image src={post.creator.image!} alt='user_image' className='rounded-full' width={40} height={40} />
+        <div className='flex-1 flex justify-start items-center gap-3 cursor-pointer'  onClick={handleClick}>
+          <Image src={post.creator.image} alt='user_image' className='rounded-full' width={40} height={40} />
           <div className="flex flex-col">
             <h3 className='font-satoshi font-semibold text-gray-800'>{post.creator.name}</h3>
             <p className="text-inter font-sm text-gray-500">{post.creator.email}</p>
