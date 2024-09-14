@@ -3,7 +3,7 @@ import '@styles/globals.css'
 import { Metadata } from 'next'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
-import { Session } from 'next-auth'
+import { getServerSession, Session } from 'next-auth'
 
 export const metadata: Metadata = {
     title: 'Prompt Share',
@@ -15,14 +15,15 @@ export const metadata: Metadata = {
 
 interface LayoutProps {
     children: ReactNode
-    session: Session
 }
 
-const Layout:React.FC<LayoutProps> = ({ children, session }) => {
+const Layout:React.FC<LayoutProps> = async ({ children }) => {
+    const session = await getServerSession();
+
   return (
     <html lang='en'>
         <body>
-            <Provider session={session}>
+            <Provider session={session!}>
                 <div className="main">
                     <div className="gradient" />
                 </div>
