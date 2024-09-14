@@ -3,7 +3,7 @@ import '@styles/globals.css'
 import { Metadata } from 'next'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
-import { getServerSession, Session } from 'next-auth'
+import { Session } from 'next-auth'
 
 export const metadata: Metadata = {
     title: 'Prompt Share',
