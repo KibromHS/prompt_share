@@ -5,10 +5,12 @@ import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 import { Session } from 'next-auth'
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
     title: 'Prompt Share',
     description: 'Discover and Share AI Prompts',
-    icons: '/assets/images/logo.svg'
+    icons: {
+        icon: '/assets/images/logo.svg'
+    }
 }
 
 interface LayoutProps {
