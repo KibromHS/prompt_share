@@ -34,7 +34,7 @@ const ProfilePage = () => {
     }
 
     fetchPosts();
-  }, []);
+  }, [params.id]);
 
   const handleEdit = () => {
   }
