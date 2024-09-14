@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@app/api/auth/[...nextauth]/route';
+import authOptions from '@lib/authOptions'
 
 export const metadata: Metadata = {
     title: 'Prompt Share',
