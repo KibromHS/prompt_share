@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 import { getServerSession } from 'next-auth'
-import authOptions from '@app/api/auth/[...nextauth]/route';
+import { authOptions } from '@app/api/auth/[...nextauth]/route';
 
 export const metadata: Metadata = {
     title: 'Prompt Share',
@@ -19,7 +19,9 @@ interface LayoutProps {
 }
 
 const Layout:React.FC<LayoutProps> = async ({ children }) => {
-    const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
+  console.log('Session:', session);
+
   return (
     <html lang='en'>
         <body>

@@ -3,12 +3,6 @@ import { connectToDB } from "@utils/database";
 import NextAuth, { Session, NextAuthOptions, DefaultUser } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-interface Profile {
-  email: string;
-  username: string;
-  picture: string;
-}
-
 declare module "next-auth" {
   interface Session {
     user: {
@@ -17,7 +11,7 @@ declare module "next-auth" {
   }
 }
 
-const authOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -26,7 +20,7 @@ const authOptions = {
   ],
 
   callbacks: {
-    async session({ session }: { session: Session }) {
+    async session({ session }) {
       if (session.user?.email) {
         const sessionUser = await User.findOne({
           email: session.user.email,
@@ -40,7 +34,7 @@ const authOptions = {
       return session;
     },
 
-    async signIn({ profile }: { profile?: Profile | null }) {
+    async signIn({ profile }) {
       try {
         await connectToDB();
 
@@ -52,8 +46,8 @@ const authOptions = {
           if (!userExists) {
             await User.create({
               email: profile.email,
-              username: profile.username?.replaceAll(" ", "_").toLowerCase(),
-              image: profile.picture,
+              username: profile.name?.replaceAll(" ", "_").toLowerCase(),
+              image: profile.image,
             });
           }
         }
@@ -67,8 +61,6 @@ const authOptions = {
   },
 };
 
-const handler = NextAuth(authOptions as NextAuthOptions);
+const handler = NextAuth(authOptions);
 
-export default authOptions;
-
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOptions };
