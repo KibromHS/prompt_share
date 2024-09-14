@@ -1,6 +1,5 @@
 import React from 'react'
 import PromptCard from './PromptCard'
-import { User } from 'next-auth'
 
 interface PromptCardListProps {
     data: {

@@ -36,10 +36,10 @@ const ProfilePage = () => {
     fetchPosts();
   }, []);
 
-  const handleEdit = (post: any) => {
+  const handleEdit = () => {
   }
 
-  const handleDelete = async (post: any) => {
+  const handleDelete = async () => {
   }
 
   return (
